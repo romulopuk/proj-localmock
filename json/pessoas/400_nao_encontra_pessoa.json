@@ -1,0 +1,13 @@
+{
+    "statusInfo": {
+      "statusCode": 400,
+      "statusMethod": "GET",
+      "statusResponse": {
+        "error": "Pessoas não encontradas"
+      }
+    },
+    "folder": {
+      "name": "pessoas",
+      "endpoint": "/pessoas"
+    }
+  }

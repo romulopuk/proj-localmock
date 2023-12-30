@@ -1,0 +1,16 @@
+{
+    "statusInfo": {
+        "statusCode": 200,
+        "statusMethod": "GET",
+        "statusResponse": {
+            "data": {
+                "nome": "joao",
+                "idade": 16
+            }
+        }
+    },
+    "folder": {
+        "name": "pessoas",
+        "endpoint": "/pessoas"
+    }
+}
