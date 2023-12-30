@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const listarPastas = ((req, res) => {
+const listarPastasService = (request) => {
     limpaPastaTemp();
 
     const folderPath = './json';
@@ -9,18 +9,19 @@ const listarPastas = ((req, res) => {
         .filter(file => fs.statSync(path.join(folderPath, file))
             .isDirectory());
 
-    res.json(folders);
-});
+    return folders;
+}
 
-const listarArquivos = ((req, res) => {
+
+const listarArquivosService = (request) => {
     limpaPastaTemp();
 
-    const folderName = req.params.folderName;
+    const folderName = request.params.folderName;
     const folderPath = `./json/${folderName}`;
     const files = fs.readdirSync(folderPath).filter(file => file.endsWith('.json'));
 
-    res.json(files);
-});
+    return files;
+}
 
 function limpaPastaTemp() {
     const tempPath = `./setup/temp`;
@@ -40,7 +41,8 @@ function limpaPastaTemp() {
 }
 
 
+
 module.exports = {
-    listarPastas,
-    listarArquivos
+    listarPastasService,
+    listarArquivosService
 }

@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3001;
 
-const routes = require('./route/rotasMock');
+const routes = require('./routes/rotasMock');
 
 app.use(express.static('view'));
 

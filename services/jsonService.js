@@ -1,32 +1,22 @@
 const fs = require('fs');
 const path = require('path');
 
-const confirmaJsonExistente = ((req, res) => {
-    const folderName = req.params.folderName;
-    const fileName = req.params.fileName;
+const criaMockJsonExistente = (request) => {
+    const folderName = request.params.folderName;
+    const fileName = request.params.fileName;
     const filePath = `../json/${folderName}/${fileName}`;
 
     try {
         const jsonData = require(filePath);
-        res.json(jsonData);
-
         criaMockJson(folderName, fileName);
+        return jsonData;
     } catch (error) {
         console.error('Erro ao ler o arquivo JSON:', error);
-        res.status(500).json({ error: 'Erro ao ler o arquivo JSON.' });
     }
-});
+}
 
-
-const evitarChamadaFavicon = ((req, res) => {
-    console.log('Chamada favicon');
-    res.status(204);
-    res.end();
-});
-
-
-const buscarJsonTemporario = ((req, res) => {
-    const sourcePath = req.params.sourcePath;
+const chamaMockJsonParaBackend = (request) => {
+    const sourcePath = request.params.sourcePath;
     const tempPath = './setup/temp';
 
     const folders = fs.readdirSync('./json')
@@ -45,9 +35,7 @@ const buscarJsonTemporario = ((req, res) => {
                 console.log('Endpoint é igual ao endpoint');
                 console.log('::: Saida do busca temp ::: ', new Date());
 
-                res.status(jsonData.statusInfo.statusCode)
-                    .json(jsonData.statusInfo.statusResponse);
-
+                return jsonData.statusInfo;
             } else {
                 console.error('Endpoint não bateu com Json: ' + jsonData.folder.endpoint);
                 res.status(404);
@@ -55,14 +43,13 @@ const buscarJsonTemporario = ((req, res) => {
 
         } catch (error) {
             console.error('Não foi possível encontrar o endpoint', error);
-            res.status(404);
         }
 
     } else {
-        console.log('Endpoint é inválido.');
-        res.status(500);
+        console.error('Endpoint é inválido.', error);
     }
-});
+}
+
 
 function criaMockJson(sourceFolder, sourceFile) {
     const tempoEntrada = new Date();
@@ -89,9 +76,7 @@ function criaMockJson(sourceFolder, sourceFile) {
 
 
 
-
 module.exports = {
-    confirmaJsonExistente,
-    evitarChamadaFavicon,
-    buscarJsonTemporario
+    criaMockJsonExistente,
+    chamaMockJsonParaBackend
 }
