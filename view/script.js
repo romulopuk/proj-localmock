@@ -26,6 +26,7 @@ async function preencherPastas() {
     foldersDropdown.addEventListener('change', preencherArquivos);
 }
 
+
 // Função para preencher as opções de arquivo
 async function preencherArquivos() {
     const folderName = document.getElementById('folders').value;
@@ -51,6 +52,7 @@ async function preencherArquivos() {
     exibirPathJson();
 }
 
+
 async function exibirPathJson() {
     const folderName = document.getElementById('folders').value;
     const fileName = document.getElementById('files').value;
@@ -71,21 +73,6 @@ async function exibirPathJson() {
         console.error(`Erro ao exibir path do JSON: ${error.message}`);
     }
 }
-
-// async function gerarArquivoTempEscolhido(folderName, fileName) {
-//     try {
-//         console.log('valores::: ' + folderName + ' - ' + fileName);
-//         const urlPath = `/api/criartemp/${folderName}/${fileName}`;
-        
-//         console.log('Chamou Criar Temp', new Date());
-//         const response = await fetch(urlPath);
-//         console.log('Response criar temp ::: ', JSON.stringify(response));
-
-//         return response;
-//     } catch (error) {
-//         console.error(`Erro ao criar arquivo temporario: ${error.message}`);
-//     }
-// }
 
 
 async function exibirDadosJSON() {

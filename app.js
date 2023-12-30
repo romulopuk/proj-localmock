@@ -1,14 +1,13 @@
-// app.js
-const { fork } = require('child_process');
+const express = require('express');
+const app = express();
+const port = 3001;
 
-// Inicia os servidores de setup e web em processos separados
-// const setupProcess = fork('./setup/setup.js');
-const webProcess = fork('./setup/web.js');
+const routes = require('./route/rotasMock');
 
-// setupProcess.on('message', (message) => {
-//   console.log(`Setup process message: ${message}`);
-// });
+app.use(express.static('view'));
 
-webProcess.on('message', (message) => {
-  console.log(`Web process message: ${message}`);
+app.use('/', routes);
+
+app.listen(port, () => {
+  console.log(`Web server running at http://localhost:${port}`);
 });
